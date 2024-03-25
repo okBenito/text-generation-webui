@@ -113,7 +113,7 @@ def update_pytorch():
     install_pytorch = f"python -m pip install --upgrade torch=={TORCH_VERSION} torchvision=={TORCHVISION_VERSION} torchaudio=={TORCHAUDIO_VERSION} "
 
     if is_cuda118:
-        install_pytorch += "--index-url https://download.pytorch.org/whl/cu118"
+        install_pytorch += "--index-url https://download.pytorch.org/whl/cu113"
     elif is_cuda:
         install_pytorch += "--index-url https://download.pytorch.org/whl/cu121"
     elif is_rocm:
@@ -290,7 +290,7 @@ def install_webui():
 
     if selected_gpu == "NVIDIA":
         if use_cuda118 == 'Y':
-            install_pytorch += "--index-url https://download.pytorch.org/whl/cu118"
+            install_pytorch += "--index-url https://download.pytorch.org/whl/cu113"
         else:
             install_pytorch += "--index-url https://download.pytorch.org/whl/cu121"
     elif selected_gpu == "AMD":
