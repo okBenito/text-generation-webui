@@ -105,14 +105,14 @@ def update_pytorch():
 
     torver = torch_version()
     is_cuda = '+cu' in torver
-    is_cuda118 = '+cu118' in torver  # 2.1.0+cu118
+    is_cuda113 = '+cu113' in torver  # 2.1.0+cu113
     is_rocm = '+rocm' in torver  # 2.0.1+rocm5.4.2
     is_intel = '+cxx11' in torver  # 2.0.1a0+cxx11.abi
     is_cpu = '+cpu' in torver  # 2.0.1+cpu
 
     install_pytorch = f"python -m pip install --upgrade torch=={TORCH_VERSION} torchvision=={TORCHVISION_VERSION} torchaudio=={TORCHAUDIO_VERSION} "
 
-    if is_cuda118:
+    if is_cuda113:
         install_pytorch += "--index-url https://download.pytorch.org/whl/cu113"
     elif is_cuda:
         install_pytorch += "--index-url https://download.pytorch.org/whl/cu121"
@@ -366,7 +366,7 @@ def update_requirements(initial_installation=False, pull=True):
     # Detect the PyTorch version
     torver = torch_version()
     is_cuda = '+cu' in torver
-    is_cuda118 = '+cu118' in torver  # 2.1.0+cu118
+    is_cuda113 = '+cu113' in torver  # 2.1.0+cu113
     is_rocm = '+rocm' in torver  # 2.0.1+rocm5.4.2
     is_intel = '+cxx11' in torver  # 2.0.1a0+cxx11.abi
     is_cpu = '+cpu' in torver  # 2.0.1+cpu
@@ -387,9 +387,9 @@ def update_requirements(initial_installation=False, pull=True):
 
     # Prepare the requirements file
     textgen_requirements = open(requirements_file).read().splitlines()
-    if is_cuda118:
-        textgen_requirements = [req.replace('+cu121', '+cu118').replace('+cu122', '+cu118') for req in textgen_requirements]
-    if is_windows() and is_cuda118:  # No flash-attention on Windows for CUDA 11
+    if is_cuda113:
+        textgen_requirements = [req.replace('+cu121', '+cu113').replace('+cu122', '+cu113') for req in textgen_requirements]
+    if is_windows() and is_cuda113:  # No flash-attention on Windows for CUDA 11
         textgen_requirements = [req for req in textgen_requirements if 'oobabooga/flash-attention' not in req]
 
     with open('temp_requirements.txt', 'w') as file:
